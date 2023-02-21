@@ -1,5 +1,5 @@
 <script>
-  import BlogTeaser from '../../components/BlogTeaser.svelte';
+  import ArticleTeaser from '../../components/ArticleTeaser.svelte';
 
   export let data, helpers;
 </script>
@@ -11,7 +11,7 @@
 </style>
 
 <ul class="feeds">
-  {#each data.markdown.blog as blog}
-    <BlogTeaser {blog} {helpers} />
+  {#each data.markdown.articles as article}
+    <ArticleTeaser {article} {helpers} />
   {/each}
 </ul>

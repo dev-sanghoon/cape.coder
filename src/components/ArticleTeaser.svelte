@@ -1,5 +1,5 @@
 <script>
-  export let blog;
+  export let article;
   export let helpers;
 </script>
 
@@ -19,8 +19,8 @@
 
 <div>
   <div class="feed-title-container">
-    <div>{blog.frontmatter.date}</div>
-    <a class="feed-title" href={helpers.permalinks.blog({ slug: blog.slug })}>{blog.frontmatter.title}</a>
+    <div>{article.frontmatter.date}</div>
+    <a class="feed-title" href={helpers.permalinks.articles({ slug: article.slug })}>{article.frontmatter.title}</a>
   </div>
-  <p class="feed-summary">{blog.frontmatter.excerpt}</p>
+  <p class="feed-summary">{article.frontmatter.excerpt}</p>
 </div>
