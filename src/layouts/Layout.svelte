@@ -1,52 +1,46 @@
 <script>
   import '../../assets/style.css';
+
   export let templateHtml;
 </script>
 
 <style>
-  :global(h1) {
-    font-style: italic;
+  .header {
+    margin-top: 30px;
+    display: flex;
+    align-items: baseline;
   }
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem;
+  .title {
+    margin-left: 25px;
+    margin-right: max(20%, 100px);
+    white-space: nowrap;
+    color: #e67e80;
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    font-weight: bold;
   }
-
-  :root {
-    --balloon-color: #06395a;
-    --balloon-font-size: 14px;
+  .categories {
+    display: flex;
   }
-  .footer {
-    padding: 2rem 0;
-    background: #06395a;
-    padding-top: 2rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-      'Helvetica Neue', sans-serif;
-    color: #f4f7fb;
-    text-align: center;
-    font-size: 14px;
-  }
-  .footer a {
-    color: #f4f7fb;
-  }
-  :global(ul li),
-  :global(ol li) {
-    margin-bottom: 0.3rem;
+  .category-item {
+    margin-right: 30px;
+    font-weight: bold;
+    color: #e69875;
+    text-decoration-line: underline;
   }
 </style>
 
-<svelte:head>
-  <!-- You can remove this balloon it is just for hover effects -->
-  <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css" />
-  <script>
-    document.addEventListener('ejs', (e) => {
-      console.log('Layout.svelte > Component Mount Detail', e.detail);
-    });
-  </script>
-</svelte:head>
+<nav class="header">
+  <a class="title" href="/">Cape.Coder</a>
+  <div class="categories">
+    <a class="category-item" href="/about/">About</a>
+  </div>
+</nav>
+
+<!-- <slot /> -->
 
 <div class="container">
   {@html templateHtml}
 </div>
-<div class="footer">Built with ❤ and <a href="https://elderguide.com/tech/elderjs/">Elder.js</a></div>

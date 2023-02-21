@@ -12,7 +12,6 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
   }
 
   :global(h2) {
@@ -20,30 +19,36 @@
   }
 
   :global(pre) {
-    background: #eee;
+    /* background: #384b55; */
+    background: #1e2326;
     padding: 1rem;
     border-radius: 1rem;
   }
 
   :global(blockquote) {
+    font-weight: bold;
+  }
+
+  /* :global(blockquote) {
     margin: 0;
-    background: #ddd;
+    background: #384b55;
     padding: 3px 1.5rem 3px 3rem;
     position: relative;
     border-radius: 1rem;
-  }
-  :global(blockquote:after) {
+  } */
+
+  /* :global(blockquote:after) {
     content: '>';
     color: #aaa;
     font-size: 30px;
     position: absolute;
-    top: 33%;
+    top: 23%;
     left: 1rem;
-  }
+  } */
 
-  :global(blockquote p) {
+  /* :global(blockquote p) {
     padding: 0;
-  }
+  } */
 </style>
 
 <svelte:head>
@@ -51,7 +56,6 @@
   <meta name="description" content={frontmatter.excerpt} />
   <link href="{settings.origin}{request.permalink}" rel="canonical" />
 </svelte:head>
-<a href="/">&LeftArrow; Home</a>
 
 <div class="title">
   <h1>{frontmatter.title}</h1>
