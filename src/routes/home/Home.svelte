@@ -1,14 +1,7 @@
 <script>
-  import HookDetail from '../../components/HookDetail.svelte';
   import BlogTeaser from '../../components/BlogTeaser.svelte';
-  import Clock from '../../components/Clock.svelte';
-  export let data, helpers, settings;
 
-  // add permalinks to the hook list so we can link to the posts.
-  const hooks = data.hookInterface.map((hook) => ({
-    ...hook,
-    link: helpers.permalinks.hooks({ slug: hook.hook.toLocaleLowerCase() }),
-  }));
+  export let data, helpers, settings;
 </script>
 
 <style>
@@ -51,11 +44,6 @@
       display: grid;
       grid-template-columns: 80% 20%;
     }
-  }
-
-  .hooks {
-    display: grid;
-    grid-template-columns: 100%;
   }
 
   @media (min-width: 768px) {
@@ -116,7 +104,6 @@
   </p>
 
   <ul>
-    <li><a href={helpers.permalinks.simple({ slug: 'simple' })}>Simple</a> - A barebones route.</li>
     <li>Home - The page you are on.</li>
     <li>
       Blog - Linked from above, but you can also see a blog post by checking out: <a
@@ -188,9 +175,6 @@
       >.
     </p>
   </div>
-  <div class="right">
-    <Clock hydrate-client={{}} />
-  </div>
 </div>
 
 <h2>The Elder.js Hook Interface</h2>
@@ -207,9 +191,3 @@
   src="https://elderguide.com/images/elderjs-hook-lifecycle-v13.png"
   alt="Elder.js hook Lifecycle v1.3"
   style="max-width:100%; margin:1rem 0;" />
-
-<div class="hooks">
-  {#each hooks as hook, i}
-    <HookDetail {hook} {i} hookEntityDefinitions={data.hookEntityDefinitions} />
-  {/each}
-</div>

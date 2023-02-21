@@ -1,6 +1,6 @@
 <script>
-  import style from '../../assets/style.css';
-  export let templateHtml, settings;
+  import '../../assets/style.css';
+  export let templateHtml;
 </script>
 
 <style>
