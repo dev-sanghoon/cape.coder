@@ -3,7 +3,6 @@
   const email = 'dev.sanghoon@gmail.com';
 
   function copyText() {
-    console.log('worked');
     navigator.clipboard.writeText(email);
     copyInfo = 'copied!';
   }
