@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="prefetch" href="/_elderjs/svelte/components/MailAddress.3e145444.js" as="script"><link rel="stylesheet" href="/_elderjs/assets/svelte-7f5eca07.css" media="all" /><style></style></head><body class="about"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+
+
+<div class="container"><!-- HTML_TAG_START --><ul><div class="mailaddress-component" id="mailaddress-ejs-nTJlXRpZSW"><div class="info-container svelte-l5m1fs"><p class="info-item svelte-l5m1fs" role="button" tabindex="0">dev.sanghoon@gmail.com</p>
+  </div></div>
+  <div><a class="info-item svelte-1wtd8ia" href="https://github.com/dev-sanghoon" target="_blank" rel="noreferrer">github.com/dev-sanghoon
+    </a></div></ul><!-- HTML_TAG_END --></div>
+    
+    <script type="module">
+            const requestIdleCallback = window.requestIdleCallback || ( cb => window.setTimeout(cb,1) );
+      
+const $$ejs = (par,eager)=>{
+  const $ejs = function(_ejs){return _ejs};
+  const prefix = '/_elderjs';
+  const initComponent = (target, component) => {
+
+    if(!!CustomEvent && target.id){
+      const split = target.id.split('-ejs-');
+      document.dispatchEvent(new CustomEvent('ejs', {
+        detail: {
+          category: 'elderjs',
+          action: 'hydrate',
+          target: target,
+          label: split[0] || target.id
+        }
+      }));
+    }
+
+    const propProm = ((typeof component.props === 'string') ? fetch(prefix+'/props/'+ component.props).then(p => p.json()).then(r => $ejs(r)) : new Promise((resolve) => resolve($ejs(component.props))));
+    const compProm = import(prefix + '/svelte/components/' + component.component);
+
+    Promise.all([compProm,propProm]).then(([comp,props])=>{
+      new comp.default({ 
+        target: target,
+        props: props,
+        hydrate: true
+      });
+    });
+  };
+  const IO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        const selected = par[entry.target.id];
+        initComponent(entry.target,selected)
+      }
+    });
+  }, { rootMargin: "200px",threshold: 0}) : undefined;
+  Object.keys(par).forEach(k => {
+    const el = document.getElementById(k);
+    if (!eager && IO) {
+        IO.observe(el);
+    } else {
+        initComponent(el,par[k]);
+    }
+  });
+};
+
+      
+      requestIdleCallback(function(){
+        $$ejs({'mailaddress-ejs-nTJlXRpZSW' : { 'component' : 'MailAddress.3e145444.js', 'props' : {}},})}, {timeout: 1000});</script>
+    
+    
+    </body></html>

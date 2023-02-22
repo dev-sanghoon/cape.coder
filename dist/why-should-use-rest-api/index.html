@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>왜 REST이어야만 하는가?</title><!-- HEAD_svelte-1dene28_START --><meta name="description" content="REST는 제약 조건이다. 이러한 제약을 함으로써, 무한한 자유를 가진 Web에 특정한 소통 스타일을 강요하고 개별 컴포넌트의 전문성을 높이기 위함이다."><link href="https://dev-sanghoon.github.io/why-should-use-rest-api/" rel="canonical"><!-- HEAD_svelte-1dene28_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-7f5eca07.css" media="all" /><style></style></head><body class="articles"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1t3qeps"><h1 class="svelte-1t3qeps">왜 REST이어야만 하는가?</h1>
+  </div>
+
+<!-- HTML_TAG_START --><h3 id="서론">서론</h3>
+<p>왜 우리는 REST 아키텍처를 사용해야 하는가? 백엔드 개발자를 모집하는 글을 보면, 다들 입을 모아 REST를 외치고 있다. RESTful API가 '무엇인지'를 알기는 쉽다. REST를 구글링하면, 수십개의 검색 결과가 나오기 때문이다.</p>
+<p>나도 그렇게 RESTful API를 공부하고 있었다. 하지만 "왜? 왜 꼭 RESTful API를 작성해야 하는데?"라는 질문을 떨쳐낼 수가 없었다. 지금 이 페이지의 서버도 내가 직접 만들었지만, REST에 대해 잘 모르는 데도 만들었고, 어쨌거나 작동은 하고 있기 때문이다. 즉, REST가 있어야만 백엔드가 작동하는 것은 아니지만, REST를 사용했을 때에만 얻을 수 있는 이득이 있으리라.</p>
+<p>결국 REST를 탄생시킨 그 논문을 읽어보는 데에 이르렀다. 그리고 그토록 갈구했던 "왜 REST이어야만 하는가?"에 대한 대답을 직접 해보려고 한다.</p>
+<h3 id="rest는-제약-조건이다">REST는 '제약 조건'이다.</h3>
+<p>REST는 웹 통신에서 특정 스타일을 제약하고, 그로부터 이익을 얻는다. "... (REST) identifies and applies constraints to elements of the system in order to differentiate the design space and allow the forces that influence system behavior ..." 논문을 읽어보면서 놀라웠던 점은 REST라는 스타일을 도출해가는 과정이었다. 특별한 제약 조건이 없이 존재한 웹이라는 시스템에서, 제약을 추가하여 어떠한 형태를 강요하고, 제약으로 인한 스타일에서 이익을 얻는 형태로 생겨났다. 이건 마치 국사 시간에 배웠던 도량형 통일과 같은 것이다. 고깃집 사장들이 근이니 gram이니 pound니 알아서 고기를 거래하고 있었는데 갑자기 벼슬아치가 오더니 "너네 고기 거래할때 gram 써라."한 것이다. 알아서 잘 거래하고 있던 고깃집 사장들은 황당할 따름인 것이다. 근데 멀리서 보면 도량형이 통일되면서 거래의 명확함이나 정보 공유가 활발해지면서 전체적으로는 이득을 보는 것이다.</p>
+<h3 id="첫번째-제약-조건은-클라이언트-서버-구조이다">첫번째 제약 조건은 클라이언트-서버 구조이다.</h3>
+<p>클라이언트-서버 구조로 고려대상을 분리하여 각각의 발전을 꾀한다. 태초에 웹이 있었다. 그곳에 사는 컴퓨터들은 자유롭게 살고 있었다. 하지만 가난했다. 그들은 작은 정보를 요청하고, 작은 정보를 응답하며 가난하게 살고 있었다. 어느날 그런 그들에게 REST가 내려와 가로되, '너는 서버가 되고, 너는 클라이언트가 되어라.' 그리하여 서버가 된 컴퓨터들은 정보를 저장하고, 정리하고, 전달하는 역할에 전문적이게 되었다. 클라이언트가 된 컴퓨터는 유저들에게 간편한 UI를 제공하여 정보를 쉽게 얻게 하였고, 아름다운 UI로 웹 세계의 아름다움을 재고하였다. 그들은 모두 풍요롭게 되었다.</p>
+<h3 id="두번째-제약-조건은-상태를-관리하지-않는-서버이다">두번째 제약 조건은 상태를 관리하지 않는 서버이다.</h3>
+<p>Stateless 서버로 정보의 완결성과 안정성, 그리고 개별 웹 구성요소의 확장성을 재고한다. "... we improve the portability of the user interface across multiple platforms and improve scalability by simplifying the server components." 그럼 왜 서버가 상태를 관리하지 않기를 요구할까? 요청 내용이 해당 요청을 이해하기 위한 모든 정보를 지니고 있기를 강요하는 것이다("... each request from client to server must contain all of the information necessary to understand the request."). 너무나 사랑하는 원칙인 'Single Source of Truth'와 맥락이 비슷하다고 생각된다. Stateless한 서버를 사용하는 것의 이득으로 다음의 세가지를 제시하고 있다. 'Visibility, reliability, and scalability'; 서버가 stateless 하다면, client의 요청과 server의 응답만으로 모든 정보의 흐름을 이해할 수 있으며, 누락되는 정보가 없다(가시성... 이라고 하기엔 조금 애매하고, 의역하자면 정보의 완결성? 온전함?이라고 할 수 있겠다. 요청만 보고도 필요한 정보를 모두 얻은 것.) 서버에 state가 존재한다면, 같은 요청을 하더라도 서버의 state에 따라 결과가 달라진다(reliability). 마지막으로, 서버가 stateless하면 state 관리 없이 구조를 확장할 수 있다는 뜻이기도 하다(Scalability, 확장성).</p>
+<h3 id="세번째-제약-조건은-캐시-사용-가능-여부에-대한-명확한-표시이다">세번째 제약 조건은 캐시 사용 가능 여부에 대한 명확한 표시이다.</h3>
+<p>캐시가 가능한지 응답에 표시해서 가능한 경우 통신을 줄여 유저 인식 성능을 개선할 수 있다. "... the data within a response to a request be implicitly or explicitly labeled as cacheable or non-cacheable." REST 아키텍처 설명에서 이 항목을 '캐시 가능'이라고 설명하는 글들이 있는데, 명확하지 않은 표현이다. 정확히 표현하자면 서버로부터의 응답이 클라이언트가 캐시 가능한지 불가능한지 확실히 알 수 있게끔 표시되어 있어야 한다는 것이다. 다시 설명하자면, 클라이언트가 서버로부터 응답을 받았을 때 그 응답을 캐시로 저장할 수 있는지 아닌지 응답 내용으로 알 수 있어야 한다는 것이다. 나아가 흥미로운 부분으로 '암묵적으로든 명시적으로든(implicitly or explicitly)'라는 내용이 있다. 암묵적인 캐시는 heuristic caching과 같은 기능을 의미하는게 아닌가 싶다.</p>
+<h3 id="네번째-제약-조건은-획일화된-인터페이스이다">네번째 제약 조건은 획일화된 인터페이스이다.</h3>
+<p>획일화된 인터페이스로 최대다수의 최대소통을 이루어낸다. "... Implementations are decoupled from the services they provide, ..." 네트워크 통신을 구성하는 컴포넌트의 개별 특징을 무시하고, 인터페이스를 획일화하는 것이다. '획일화'라는 단어에서 약간의 부적 감정이 느껴질 수 있다. 그러나 REST 아키텍처 논문을 읽으면서 느낀 것은, 최대 다수의 소통을 중점에 두고 있다는 기분을 받았다. 웹 생태계를 구성하는 세지 못할 정도로 많은 요소들이 모두 문제없이 소통을 할 수 있게끔 하는 것이 목적인 것이다. 개별 요소들의 특성을 고려하면 더 최적화된 통신 방식이 있을 수 있다. 그러나 그것을 희생하여 최대 다수의 최적 소통을 목표로 하는 것이다.</p>
+<p>그리고 우리는 이 항목을 위해서 http method와 uri를 RESTful하게 작성하는 것이다. 그리고 이렇게 획일화된 인터페이스로 브라우저가 nodejs 서버와 소통이 가능하고, nodejs 서버는 java 서버와도 소통할 수 있는 웹 생태계가 탄생하는 것이다.</p>
+<p>그리고 그러한 획일화된 인터페이스는 다음의 제약들을 만족해야 한다. "REST is defined by four interface constraints: identification of resources; manipulation of resources through representations; self-descriptive messages; and, hypermedia as the engine of application state." 여기에 해당하는 내용들이 우리가 RESTful API를 작성하는데 필요한 내용들이며, 이에 대해서는 다음 글에서 자세히 설명해보고자 한다.</p>
+<h3 id="다섯번째-제약-조건은-계층-구조이다">다섯번째 제약 조건은 계층 구조이다.</h3>
+<p>계층 구조로 시스템의 구조를 단순화하고 각 요소의 독립성을 높힌다. "... By restricting knowledge of the system to a single layer, we place a bound on the overall system complexity and promote substrate independence." 계층 구조를 통해 전체 구조의 복잡성을 제한하고, 각 계층의 독립성을 재고한다. 예를 들어, 클라이언트 - 프록시 - 서버로 이루어진 구조가 있다고 하자. 만약 특정 클라이언트 A가 프록시를 거치지 않고 서버와 통신할 수 있다면, 이는 REST한 아키텍처가 아닌 것이다.</p>
+<h3 id="여섯번째-선택적인-제약-조건은-code-on-demand이다">여섯번째 '선택적인' 제약 조건은 Code on demand이다.</h3>
+<p>Code on demand로 클라이언트의 확장성을 재고한다. 이 글이 쓰여진 시대를 생각하면, Client가 브라우저 그 자체를 의미하는 시기라는 것을 생각해야 한다.</p>
+<p>브라우저도 웹에서 클라이언트이며, 우리가 웹사이트를 로드하려면 로드하려는 html 문서를 서버에 요청해야 한다. 즉 클라이언트는 브라우저 그 자체이고, 서버는 웹사이트를 저장하고 있는 컴퓨터이다. 이 때(로드하기 전에), 클라이언트인 웹 브라우저는 웹사이트를 받았을 때 어떤 코드가 실행될 지 알수없는 상태이다. 따라서 자바스크립트를 사용하면 Code on demand를 사용하고 있다고 봐도 무방할 것 같다. 만약 Code on demand를 사용하지 않는 것이 원칙이었다면, 브라우저 설정에서 '자바스크립트 사용하지 않기'를 설정한 후 웹을 사용하는 것이 원칙이었을 것이다.</p>
+<h3 id="결론">결론</h3>
+<p>API는 인터페이스이다. 앞서 언급한 6가지 제약 조건은 어플리케이션 단계에서 REST를 구현하는 방법이라고 할 수 있다. 그러나 우리가 RESTful API를 구현하려면, 클라이언트와 서버와 같은 웹 구성요소가 인터페이스를 할 시 어떻게 해야 할지를 알아야 할 것이다. 그리고 네번째 항목인 Uniform Interface의 상세 내용이 이에 해당할 것이다. 다음 글에서 본격적으로 RESTful API를 확인해보도록 하자.</p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>
