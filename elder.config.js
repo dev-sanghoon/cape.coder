@@ -24,9 +24,10 @@ module.exports = {
   },
   plugins: {
     '@elderjs/plugin-markdown': {
-      routes: ['articles'],
+      routes: ['articles', 'logs'],
       contents: {
         articles: 'src/markdowns/articles',
+        logs: 'src/markdowns/logs',
       },
     },
     '@elderjs/plugin-browser-reload': {
