@@ -1,6 +1,6 @@
 require('dotenv').config();
 module.exports = {
-  origin: 'https://dev-sanghoon.github.io', // TODO: update this. The URL of your site's root, without a trailing slash
+  origin: 'https://sanghoon.today', // TODO: update this. The URL of your site's root, without a trailing slash
   lang: 'en',
   srcDir: 'src',
   distDir: 'docs',
