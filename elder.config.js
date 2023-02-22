@@ -3,7 +3,7 @@ module.exports = {
   origin: 'https://dev-sanghoon.github.io', // TODO: update this. The URL of your site's root, without a trailing slash
   lang: 'en',
   srcDir: 'src',
-  distDir: 'dist',
+  distDir: 'docs',
   rootDir: process.cwd(),
   build: {},
   prefix: '', // If you want your site to be built within a sub folder within your `distDir` you can use this.
