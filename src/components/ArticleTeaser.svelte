@@ -19,7 +19,7 @@
 
 <div>
   <div class="feed-title-container">
-    <div>{article.frontmatter.date}</div>
+    <div>[{article.frontmatter.date}]</div>
     <a class="feed-title" href={helpers.permalinks.articles({ slug: article.slug })}>{article.frontmatter.title}</a>
   </div>
   <p class="feed-summary">{article.frontmatter.excerpt}</p>
