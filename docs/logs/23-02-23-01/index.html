@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>dev logs</title><!-- HEAD_svelte-14tj2l_START --><meta name="description" content="난 지금까지 비동기 프로그래밍을 제대로 했을까?"><link href="https://sanghoon.today/logs/23-02-23-01/" rel="canonical"><!-- HEAD_svelte-14tj2l_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-16d3593b.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1t3qeps"><h1 class="svelte-1t3qeps">난 지금까지 비동기 프로그래밍을 제대로 했을까?</h1>
+  </div>
+
+<!-- HTML_TAG_START --><h3 id="문제">문제</h3>
+<p>이제까지 별 생각 없이 async await를 사용해왔는데, 잘못 사용해왔던 것 아닐까?</p>
+<h3 id="확인">확인</h3>
+<p>이하는 사용한 함수이다.</p>
+<pre><code class="language-js">async function delay(time) {
+  console.log(`2st stack applied on ${time} function`);
+  const response = new Promise((resolve) => {
+    console.log('promise sent to APIs');
+    setTimeout(() => {
+      console.log(`on resolve, function ${time} is on event queue`);
+      resolve(`resolved in ${time}`);
+    }, time);
+  });
+  console.log(`2st stack removed on ${time} function`);
+  return response;
+}
+
+async function delayWrapper(time) {
+  console.log(`1st stack applied on ${time} function`);
+  const response = delay(time);
+  console.log(`1st stack removed on ${time} function`);
+  return response;
+}
+
+async function sequentialDelay(items) {
+  const result = [];
+  for (const item of items) {
+    const response = await delayWrapper(item);
+    result.push(response);
+  }
+  return result;
+}
+
+function errorThrower(time) {
+  if (time === 3000) {
+    throw new Error();
+  }
+}
+</code></pre>
+<p>최초에 Node.js의 작동 방식에 대해 의문을 가지게 된 계기가 Promise.all이었기 때문에 event loop와 promise를 연관지어 이해하고 싶었다.</p>
+<ol>
+<li>setTimeout의 콜백은 event loop로 넘어간다.</li>
+<li>Promise.all은 비동기 프로그래밍을 지원한다. 내부의 promise들이 concurrent하게 실행된다는 것이다. (parallel하지는 않다.)</li>
+</ol>
+<pre><code class="language-js">const firstResponse = await Promise.all([delayWrapper(2000), delayWrapper(1000), delayWrapper(3000)]);
+console.log(firstResponse);
+</code></pre>
+<p>위의 코드를 실행해보면 setTimeout 이전의 모든 코드가 바로 실행된다는 점을 console로 확인할 수 있다. 그리고 setTimeout의 callback은 Node.js 내부의 API를 활용하여 시간 순서대로 event queue로 넘어가는 것으로 보인다. 즉, event queue에는 array 순서대로 2000, 1000, 3000으로 queue가 쌓이는게 아니라, 1000, 2000, 3000의 순서로 쌓인다.</p>
+<ol start="3">
+<li>await는 동시성을 지원하지 않는다?</li>
+</ol>
+<pre><code class="language-js">const firstResponse = await Promise.all([delayWrapper(2000), delayWrapper(1000), delayWrapper(3000)]);
+const secondResponse = await sequentialDelay([1500, 1000]);
+console.log(firstResponse);
+console.log(secondResponse);
+</code></pre>
+<p>위의 코드는 모두 실행되는데 대략 몇 ms를 필요로 할까? firstResponse를 기다리는데 3000, secondResponse를 기다리는데 2500이다(secondResponse는 순서대로 실행되므로 1500 + 1000). 따라서 총 5500의 시간을 소요한다. 하지만 secondResponse가 firstResponse의 영향을 받지 않는다 가정하면, 이 둘을 각각 await로 가져오는 것은 비효율성을 초래하는 것이다. 그렇다면 어떻게 짜야 하나?</p>
+<pre><code class="language-js">const firstResponse = Promise.all([delayWrapper(2000), delayWrapper(1000), delayWrapper(3000)]);
+const secondResponse = sequentialDelay([1500, 1000]);
+const summedResponse = await Promise.all([firstResponse, secondResponse]);
+console.log(summedResponse);
+</code></pre>
+<p>위와 같이 짜게 된다면, 3000ms만에 처리가 가능하다.</p>
+<ol start="4">
+<li>위 코드로 콜 스택 또한 멀리서나마 확인이 가능하다.
+에러가 발생하면 늘 확인하게 되는 것이 stack trace이다.</li>
+</ol>
+<pre><code class="language-js">const response = new Promise((resolve) => {
+  console.log('promise sent to APIs');
+  errorThrower(time);
+  setTimeout(() => {
+    console.log(`on resolve, function ${time} is on event queue`);
+    resolve(`resolved in ${time}`);
+  }, time);
+});
+</code></pre>
+<p>delay 함수 내부에 위와 같이 errorThrower 함수를 넣고 에러를 확인해보았다.</p>
+<pre><code class="language-sh">Error
+    at errorThrower (/Users/.../index.js:24:11)
+    at /Users/.../index.js:5:5
+    at new Promise (&#x3C;anonymous>)
+    at delay (/Users/.../index.js:3:20)
+    at delayWrapper (/Users/.../index.js:17:20)
+    at /Users/.../index.js:56:5
+</code></pre>
+<p>그러면 index.js 파일 내부의 delayWrapper 함수 내부의 delay 내부의... 과 같이 에러 당시의 스택이 차례대로 나오게 된다.</p>
+<pre><code class="language-js">const response = new Promise((resolve) => {
+  console.log('promise sent to APIs');
+  setTimeout(() => {
+    console.log(`on resolve, function ${time} is on event queue`);
+    errorThrower(time);
+    resolve(`resolved in ${time}`);
+  }, time);
+});
+</code></pre>
+<p>setTimeout의 콜백에 errorThrower을 넣으면 재미있는 스택 트레이스를 볼 수 있다.</p>
+<pre><code class="language-sh">Error
+    at errorThrower (/Users/lostin185/Desktop/study/nodejs-promise/index.js:24:11)
+    at Timeout.toCallback [as _onTimeout] (/Users/lostin185/Desktop/study/nodejs-promise/index.js:7:7)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+</code></pre>
+<p>재미있게도 실행했을 때 setTimeout 콜백에 익명함수가 아닌 기명함수를 넣었을 때 해당 함수의 이름이 스택 트레이스에 나오는걸 확인할 수 있었다. 브라우저에서 동일한 코드를 실행하면 스택 트레이스가 미묘하게 다르다. 브라우저 환경과 Node.js 환경의 차이를 확인할 수 있는 부분이었다. 스택은 동일한 v8엔진에서 나오겠지만, 이벤트 루프는 서로 환경이 다르니말이다.</p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>
