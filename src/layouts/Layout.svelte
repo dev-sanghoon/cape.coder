@@ -33,7 +33,9 @@
 </style>
 
 <nav class="header">
-  <a class="title" href="/">Cape.Coder</a>
+  <a href="/">
+    <h1 class="title">Cape.Coder</h1>
+  </a>
   <div class="categories">
     <a class="category-item" href="/logs/">Logs</a>
     <a class="category-item" href="/about/">About</a>

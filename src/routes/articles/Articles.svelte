@@ -58,7 +58,7 @@
 </svelte:head>
 
 <div class="title">
-  <h1>{frontmatter.title}</h1>
+  <h2>{frontmatter.title}</h2>
   {#if frontmatter.author}<small>By {frontmatter.author}</small>{/if}
 </div>
 
