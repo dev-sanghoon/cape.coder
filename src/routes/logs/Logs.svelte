@@ -36,7 +36,7 @@
 </svelte:head>
 
 <div class="title">
-  <h2>{frontmatter.question}</h2>
+  <h1>{frontmatter.question}</h1>
 </div>
 
 {#if html}
