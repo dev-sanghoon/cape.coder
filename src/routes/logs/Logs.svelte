@@ -52,7 +52,7 @@
 </style>
 
 <svelte:head>
-  <title>dev logs</title>
+  <title>{frontmatter.question}</title>
   <meta name="description" content={frontmatter.question} />
   <link href="{settings.origin}{request.permalink}" rel="canonical" />
 </svelte:head>
