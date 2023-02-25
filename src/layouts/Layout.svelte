@@ -42,8 +42,6 @@
   </div>
 </nav>
 
-<!-- <slot /> -->
-
 <div class="container">
   {@html templateHtml}
 </div>

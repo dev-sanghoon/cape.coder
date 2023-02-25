@@ -1,5 +1,5 @@
 <script>
-  export let data, request, settings; // data is mainly being populated from the @elderjs/plugin-markdown
+  export let data, request, settings;
   const { html, frontmatter } = data;
 </script>
 
@@ -19,7 +19,6 @@
   }
 
   :global(pre) {
-    /* background: #384b55; */
     background: #1e2326;
     padding: 1rem;
     border-radius: 1rem;
@@ -28,27 +27,6 @@
   :global(blockquote) {
     font-weight: bold;
   }
-
-  /* :global(blockquote) {
-    margin: 0;
-    background: #384b55;
-    padding: 3px 1.5rem 3px 3rem;
-    position: relative;
-    border-radius: 1rem;
-  } */
-
-  /* :global(blockquote:after) {
-    content: '>';
-    color: #aaa;
-    font-size: 30px;
-    position: absolute;
-    top: 23%;
-    left: 1rem;
-  } */
-
-  /* :global(blockquote p) {
-    padding: 0;
-  } */
 </style>
 
 <svelte:head>
@@ -59,7 +37,6 @@
 
 <div class="title">
   <h2>{frontmatter.question}</h2>
-  <!-- {#if frontmatter.author}<small>By {frontmatter.author}</small>{/if} -->
 </div>
 
 {#if html}
