@@ -5,7 +5,9 @@ slug: '23-02-24-01'
 
 ### 문제
 
-
 ### 응답
+
 bcrypt
 watch paint dry
+
+참고> https://d2.naver.com/helloworld/318732
