@@ -1,13 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>dev logs</title><!-- HEAD_svelte-14tj2l_START --><meta name="description" content="대체 왜 Node.js를 사용해야 하는가? (1)"><link href="https://sanghoon.today/logs/23-02-22-01/" rel="canonical"><!-- HEAD_svelte-14tj2l_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-d2466eb8.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>대체 왜 Node.js를 사용해야 하는가? (1)</title><!-- HEAD_svelte-lb9a1f_START --><meta name="description" content="대체 왜 Node.js를 사용해야 하는가? (1)"><link href="https://sanghoon.today/logs/23-02-22-01/" rel="canonical"><!-- HEAD_svelte-lb9a1f_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-c9ba4b40.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
   <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
     <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
 
-
-
 <div class="container"><!-- HTML_TAG_START -->
 
-<div class="title svelte-1t3qeps"><h1 class="svelte-1t3qeps">대체 왜 Node.js를 사용해야 하는가? (1)</h1>
-  </div>
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">대체 왜 Node.js를 사용해야 하는가? (1)</h1></div>
 
 <!-- HTML_TAG_START --><h3 id="문제">문제</h3>
 <p>대체 왜 Node.js를 써야 하는가?</p>
@@ -22,7 +19,7 @@
 <ol start="4">
 <li>I/O는 OS를 포함하기 때문에, Node.js도 마음만 먹으면 멀티 쓰레드를 도입할 수 있었을 것이다.</li>
 <li>그러나 싱글 쓰레드를 선택했다. 멀티 쓰레드를 채용한 네트워크 작업이 어렵고 비효율적이라고 판단했기 때문이다.</li>
-<li>확장성(scalability)을 위해서이다.</li>
+<li>쉬운 사용성과 확장성(scalability)을 위해서이다.</li>
 </ol>
 <h3 id="의문">의문</h3>
 <p>웹서비스가 성숙하여 안정기에 이르면, Java와 같은 안정적인 언어로 마이그레이션하는 것이 나은가? 아니면 그냥 처음부터 Java로 작업하는 것이 나은가? 자바 공화국이라고 불리는 한국에서, 향후 마이그레이션 작업을 고려할 때 차라리 처음부터 자바로 작업하는 것이 나을 것이라는 판단을 하지 않을까? 향후에 Java로 마이그레이션이 필요 없는 서비스일 때 Node를 쓰는게 낫지 않을까 하는 생각이 든다. 확장성은 덤으로 얹어지는 것이 아닐까?</p>
