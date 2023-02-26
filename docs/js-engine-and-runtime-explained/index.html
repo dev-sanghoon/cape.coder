@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Node.js가 싱글 쓰레드인 것은 불가피했던 걸까?</title><!-- HEAD_svelte-1dene28_START --><meta name="description" content="멀티 쓰레드로 만들 수도 있었다. 하지만 확장성과 효율성을 위해 싱글 쓰레드로 만들었다."><link href="https://sanghoon.today/js-engine-and-runtime-explained/" rel="canonical"><!-- HEAD_svelte-1dene28_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-d16f3303.css" media="all" /><style></style></head><body class="articles"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Node.js는 왜 싱글 쓰레드일까?</title><!-- HEAD_svelte-1dene28_START --><meta name="description" content="멀티 쓰레드로 만들 수도 있었다. 하지만 확장성과 효율성을 위해 싱글 쓰레드로 만들었다."><link href="https://sanghoon.today/js-engine-and-runtime-explained/" rel="canonical"><!-- HEAD_svelte-1dene28_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-41adca60.css" media="all" /><style></style></head><body class="articles"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
   <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
     <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
 
 <div class="container"><!-- HTML_TAG_START -->
 
-<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">Node.js가 싱글 쓰레드인 것은 불가피했던 걸까?</h1>
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">Node.js는 왜 싱글 쓰레드일까?</h1>
   </div>
 
 <!-- HTML_TAG_START --><h3 id="js-엔진과-런타임">JS 엔진과 런타임</h3>
@@ -24,10 +24,10 @@
 <a href="https://nodejs.dev/en/learn/introduction-to-nodejs/">Introduction to Node.js (Node.js)</a><br>
 <a href="https://nodejs.org/en/about/">About Node.js (Node.js)</a><br>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">The event loop (MDN)</a><br>
-<a href="https://www.voidcanvas.com/nodejs-event-loop/">Node.js event loop workflow &#x26; lifecycle in low level (Paul Shan)</a> &#x26; <a href="https://evan-moon.github.io/2019/08/01/nodejs-event-loop-workflow/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84%EB%8A%94-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84-%EB%82%B4%EB%B6%80%EC%97%90-%EC%9E%88%EB%8B%A4">문동욱 님의 번역</a><br>
+<a href="https://www.voidcanvas.com/nodejs-event-loop/">Node.js event loop workflow &#x26; lifecycle in low level (Paul Shan)</a> &#x26; <a href="https://evan-moon.github.io/2019/08/01/nodejs-event-loop-workflow/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84%EB%8A%94-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84-%EB%82%B4%EB%B6%80%EC%97%90-%EC%9E%88%EB%8B%A4">Evans 님의 번역</a><br>
 <a href="https://yceffort.kr/2021/04/nodejs-multithreading-worker-threads">nodejs의 멀티쓰레딩과 worker threads (yceffort 님)</a><br>
-<a href="https://www.reddit.com/r/node/comments/cluorc/what_are_the_differences_between_nodes_event_loop/">What are the differences between node's event loop and V8's event loop?</a><br>
-<a href="https://www.oowgnoj.dev/review/advanced-js-1">JavaScript, 인터프리터 언어일까? (박종우 님)</a><br>
+<a href="https://www.reddit.com/r/node/comments/cluorc/what_are_the_differences_between_nodes_event_loop/">What are the differences between node's event loop and V8's event loop? (reddit)</a><br>
+<a href="https://www.oowgnoj.dev/review/advanced-js-1">JavaScript, 인터프리터 언어일까? (oowgnoj 님)</a><br>
 <a href="https://velog.io/@jjunyjjuny/%EB%B0%B1%EC%97%94%EB%93%9C%EB%8A%94-%EC%B2%98%EC%9D%8C%EC%9D%B4%EB%9D%BC..-2.-Node.js%EB%A1%9C-%EB%B0%B1%EC%97%94%EB%93%9C%EB%A5%BC-%EA%B5%AC%EC%84%B1%ED%95%9C%EB%8B%A4%EB%8A%94-%EA%B2%83%EC%9D%80">Node.js로 백엔드를 구성한다는 것은 (jjunyjjuny님)</a><br>
 <a href="https://meetup.nhncloud.com/posts/89">자바스크립트와 이벤트 루프 (김동우 님)</a></p>
 <!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
