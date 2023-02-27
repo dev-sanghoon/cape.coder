@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>mySQL collation은 어떻게 처리하는 것이 맞나?</title><!-- HEAD_svelte-lb9a1f_START --><meta name="description" content="mySQL collation은 어떻게 처리하는 것이 맞나?"><link href="https://sanghoon.today/logs/23-02-27-01/" rel="canonical"><!-- HEAD_svelte-lb9a1f_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-56cc3c2b.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">mySQL collation은 어떻게 처리하는 것이 맞나?</h1></div>
+
+<!-- HTML_TAG_START --><h3 id="문제">문제</h3>
+<p>bénédictine이라는 재료를 사용할 때 WHERE 절에서 latin1_swedish_ci가 utf8_general_ci와 맞지 않다는 에러가 발생하였다. GCP VM 인스턴스에서 ubuntu 18.04에서 발생한 에러이다. 기존에 맥에서 동일한 로직을 실행했을 때에는 에러가 발생하지 않았다. mysql> status를 확인했을 때 ubuntu는 latin1으로 되어있었고, mac은utf8mb4로 되어있었다. 테스트환경에서 발생하면 문제가 없는데 프로덕션에서 위와 같은 이슈가 발생하면 어떻게 하지? 갑자기 mysql 서버의 collation을 모두 utf8mb4로 바꾸어버리면 잠재적 에러가 있지 않을까?</p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>
