@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>왜 PATCH는 idempotent하지 않을까?</title><!-- HEAD_svelte-lb9a1f_START --><meta name="description" content="왜 PATCH는 idempotent하지 않을까?"><link href="https://sanghoon.today/logs/23-03-01-01/" rel="canonical"><!-- HEAD_svelte-lb9a1f_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-5c2ff347.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">왜 PATCH는 idempotent하지 않을까?</h1></div>
+
+<!-- HTML_TAG_START --><h3 id="사전-고지">사전 고지</h3>
+<p>해당 글은 다음 글을 요약한 글입니다. 일독을 추천드립니다.
+<a href="https://www.qu3vipon.com/idempotence-of-patch">PATCH는 정말 idempotent 하지 않을까?</a></p>
+<h3 id="주요-내용">주요 내용</h3>
+<p>PATCH is neither safe nor idempotent (...). - <a href="https://www.rfc-editor.org/rfc/rfc5789">RFC5789</a>, Section 2.<br>
+PATCH는 '안전', '멱등' 속성을 지니지 않는다.</p>
+<p><a href="https://twitter.com/fielding/status/275471320685367296">Roy T. Fielding의 트윗</a><br>
+PATCH는 PUT이 하지 못하는 부분을 보완하기 위해 만들었다.</p>
+<p>In a PUT request, the enclosed entity is considered to be a modified version of the resource stored on the origin server, and the client is requesting that the stored version be replaced. With PATCH, however, the enclosed entity contains a set of instructions describing how a resource currently residing on the origin server should be modified to produce a new version. - <a href="https://www.rfc-editor.org/rfc/rfc5789">RFC5789</a><br>
+PUT은 저장된 데이터를 replace하는 method이며, PATCH는 저장된 데이터가 어떻게 변경되어야 하는지에 대한 instruction을 담았다.</p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc6092">RFC6902</a><br>
+JSON Patch는 idempotent하지 않다. (<code>Content-Type: application/json-patch+json</code>)</p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc7396">RFC7396</a><br>
+JSON Merge Patch는 idempotent하다.(<code>Content-Type: application/merge-patch+json</code>)</p>
+<h3 id="참고">참고</h3>
+<p>좋은 글 진심으로 감사드립니다.<br>
+<a href="https://www.qu3vipon.com/idempotence-of-patch">PATCH는 정말 idempotent 하지 않을까?</a><br>
+<a href="https://twitter.com/fielding/status/275471320685367296">Roy T. Fielding의 트윗</a>
+<a href="https://www.rfc-editor.org/rfc/rfc5789">RFC5789</a><br>
+<a href="https://www.rfc-editor.org/rfc/rfc6092">RFC6902</a><br>
+<a href="https://www.rfc-editor.org/rfc/rfc7396">RFC7396</a></p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>

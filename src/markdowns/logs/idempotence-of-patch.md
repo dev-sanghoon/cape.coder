@@ -1,0 +1,35 @@
+---
+question: '왜 PATCH는 idempotent하지 않을까?'
+slug: '23-03-01-01'
+---
+
+### 사전 고지
+
+해당 글은 다음 글을 요약한 글입니다. 일독을 추천드립니다.
+[PATCH는 정말 idempotent 하지 않을까?](https://www.qu3vipon.com/idempotence-of-patch)
+
+### 주요 내용
+
+PATCH is neither safe nor idempotent (...). - [RFC5789](https://www.rfc-editor.org/rfc/rfc5789), Section 2.  
+PATCH는 '안전', '멱등' 속성을 지니지 않는다.
+
+[Roy T. Fielding의 트윗](https://twitter.com/fielding/status/275471320685367296)  
+PATCH는 PUT이 하지 못하는 부분을 보완하기 위해 만들었다.
+
+In a PUT request, the enclosed entity is considered to be a modified version of the resource stored on the origin server, and the client is requesting that the stored version be replaced. With PATCH, however, the enclosed entity contains a set of instructions describing how a resource currently residing on the origin server should be modified to produce a new version. - [RFC5789](https://www.rfc-editor.org/rfc/rfc5789)  
+PUT은 저장된 데이터를 replace하는 method이며, PATCH는 저장된 데이터가 어떻게 변경되어야 하는지에 대한 instruction을 담았다.
+
+[RFC6902](https://www.rfc-editor.org/rfc/rfc6092)  
+JSON Patch는 idempotent하지 않다. (`Content-Type: application/json-patch+json`)
+
+[RFC7396](https://www.rfc-editor.org/rfc/rfc7396)  
+JSON Merge Patch는 idempotent하다.(`Content-Type: application/merge-patch+json`)
+
+### 참고
+
+좋은 글 진심으로 감사드립니다.  
+[PATCH는 정말 idempotent 하지 않을까?](https://www.qu3vipon.com/idempotence-of-patch)  
+[Roy T. Fielding의 트윗](https://twitter.com/fielding/status/275471320685367296)
+[RFC5789](https://www.rfc-editor.org/rfc/rfc5789)  
+[RFC6902](https://www.rfc-editor.org/rfc/rfc6092)  
+[RFC7396](https://www.rfc-editor.org/rfc/rfc7396)
