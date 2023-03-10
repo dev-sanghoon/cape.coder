@@ -9,6 +9,7 @@ code {
 }
 
 body {
+  font-family: 'Courier New', Courier, monospace;
   background-color: #232a2e;
   color: #859289;
   max-width: 720px;
