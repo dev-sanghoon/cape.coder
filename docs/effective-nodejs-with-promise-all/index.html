@@ -1,10 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>난 지금까지 비동기 프로그래밍을 제대로 했을까?</title><!-- HEAD_svelte-lb9a1f_START --><meta name="description" content="난 지금까지 비동기 프로그래밍을 제대로 했을까?"><link href="https://sanghoon.today/logs/23-02-23-01/" rel="canonical"><!-- HEAD_svelte-lb9a1f_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-eabb67d2.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Node.js 런타임 이해하기 - 비동기의 효율적인 사용</title><!-- HEAD_svelte-1dene28_START --><meta name="description" content="서로 영향을 주지 않는 비동기 요청은 각각을 await하는 것보다는 Promise.all을 활용하면 Node.js 런타임을 효용을 높일 수 있다."><link href="https://sanghoon.today/effective-nodejs-with-promise-all/" rel="canonical"><!-- HEAD_svelte-1dene28_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-f56a8d3e.css" media="all" /><style></style></head><body class="articles"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
   <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
     <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
 
 <div class="container"><!-- HTML_TAG_START -->
 
-<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">난 지금까지 비동기 프로그래밍을 제대로 했을까?</h1></div>
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">Node.js 런타임 이해하기 - 비동기의 효율적인 사용</h1>
+  </div>
 
 <!-- HTML_TAG_START --><h3 id="문제">문제</h3>
 <p>이제까지 별 생각 없이 async await를 사용해왔는데, 잘못 사용해왔던 것 아닐까?</p>

@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>패키지 결정 기준은 어떻게 해야 하나?</title><!-- HEAD_svelte-lb9a1f_START --><meta name="description" content="패키지 결정 기준은 어떻게 해야 하나?"><link href="https://sanghoon.today/logs/23-03-12-01/" rel="canonical"><!-- HEAD_svelte-lb9a1f_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-f56a8d3e.css" media="all" /><style></style></head><body class="logs"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">패키지 결정 기준은 어떻게 해야 하나?</h1></div>
+
+<!-- HTML_TAG_START --><h3 id="문제">문제</h3>
+<p>서버에서 활용할 로깅 패키지를 찾는데, 무슨 기준으로 로깅 패키지를 선택해야 하나 고민이 된다.</p>
+<p><a href="https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342">로깅의 장점</a>에서 설명하는 로그의 장점이 납득이 되었다.</p>
+<ul>
+<li>타임스탬프: 구현하기 매우 귀찮은 부분이다... 간단한 API를 제공하여 보기 쉽게 제공해준다면 너무 좋을 듯</li>
+<li>로그 파일 저장 기능: fs 쓰면 간단하게 저장 할 수 있긴 한데... 수많은 사람들이 쓰면서 개량된 기능들을 쓰는 것은 가치가 있지. 다만 로그 파일이 쌓였을 때 삭제할 방법도 생각해두긴 해야 한다... 로그 파일 용량이 별로 크지 않나? 수많은 요청/응답이 있다면 유지보수하기가 무척 힘들 듯 한데...</li>
+<li>로그 레벨에 따라 표시 변경: 개별 로그에 레벨을 지정할 수 있고, env에 따라서 표시 여부, 색 등을 변경할 수 있는 기능. 있으면 좋은데, 이건 그렇게 중요한지는 잘 와닿진 않는다.</li>
+</ul>
+<p>더 알아보다가, <a href="https://yceffort.kr/2021/02/logging-in-nodejs">console.log는 JS의 성능에 악영향을 미친다</a>는 놀라운 내용을 접했다.</p>
+<p>그냥 winston + morgan (가장 대중적인 픽인듯 하다)를 쓰려다 구글에서 nodejs loggers compared를 찾아 <a href="https://geshan.com.np/blog/2021/01/nodejs-logging-library/">좋은 글</a>을 찾았다.</p>
+<p>winston은 <a href="https://github.com/winstonjs/winston#motivation">Motivation에서 transport를 강조</a>하고 있다. transport는 로그가 저장되는 위치를 의미한다. 저장 위치를 다양하게 할 수 있다는 것이 장점이다.</p>
+<p>bunyan은 로그를 JSON으로 저장한다는 점이 핵심인 듯 하다. <a href="https://github.com/trentm/node-bunyan">"Server logs should be structured"</a>라고 한다. 로그를 집계하여 데이터화하기엔 좋을 듯 하다. 로그를 프로그램을 사용해서 값을 찾거나 하기에도 좋을 듯 하다.</p>
+<p><a href="https://github.com/pinojs/pino">pino</a>는 비동기를 강조한다. 만약 로그 때문에 프로그램이 터지는 상황이 생긴다면 (물론 극단적이지만), 그건 로그 자체의 의도와는 다르게 작동하는 것이니까...</p>
+<p><a href="https://github.com/pimterry/loglevel">loglevel</a>은 쓰기 편한 것이 가장 큰 장점인 듯 하다. 그러나 transport를 제공하지 않는 것을 보니, 어디엔가 로그를 저장하는 기능은 없는 듯 하다. 그러면 좀 아쉽지 않나?....</p>
+<p>loglevel이 가장 마음에 드는데, 저장 기능을 제공하지 않는 것 보니 제외하는 것이 맞을 듯 하다. 우선 pino를 사용하고, 향후에 사이드 프로젝트에서 loglevel을 사용해보는 것도 괜찮겠다.</p>
+<p>사실 중요한 건 빠르게 로깅 시스템을 구축하는 것이니까, 인터넷에 많은 winston의 best practice를 사용해서 구현하는 것이 우선시되지 않을까? morgan과 조합해서... 싶은 마음도 들고... 고민이다.</p>
+<h3 id="참고">참고</h3>
+<p>좋은 글 감사합니다. 큰 도움이 되었습니다. Thank you for sharing great articles!
+<a href="https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342">Better logs for ExpressJS using Winston and Morgan with Typescript (by
+Andrea Vassallo)</a><br>
+<a href="https://yceffort.kr/2021/02/logging-in-nodejs">Nodejs에서 로깅하기 (yceffort 님)</a><br>
+<a href="https://42place.innovationacademy.kr/archives/9137">node.js 서버에서 로그를 남겨보자 (yurlee 님)</a>
+<a href="https://geshan.com.np/blog/2021/01/nodejs-logging-library/">5 Node.js Logging libraries compared for you to make the optimal choice</a></p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>
