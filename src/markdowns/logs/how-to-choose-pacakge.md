@@ -29,7 +29,8 @@ loglevel이 가장 마음에 드는데, 저장 기능을 제공하지 않는 것
 
 사실 중요한 건 빠르게 로깅 시스템을 구축하는 것이니까, 인터넷에 많은 winston의 best practice를 사용해서 구현하는 것이 우선시되지 않을까? morgan과 조합해서... 싶은 마음도 들고... 고민이다.
 
---------
+---
+
 고민고민하다가 pino를 선택하게 되었다.
 서버가 성능이 좋지 않아서, 비동기를 활용한 pino라면 로깅이 서버에 미치는 영향을 최소화할 수 있으리라 판단했다.
 
@@ -37,12 +38,11 @@ pino 내부의 다양한 기능을 활용하는 건 아님에도 불구하고, �
 
 pino를 쓰기 위해 문서를 보다가 stderr, dev/null 등의 존재를 알게 되었다. 나중에 확인해봐야 겠다.
 
-
 ### 참고
 
 좋은 글 감사합니다. 큰 도움이 되었습니다. Thank you for sharing great articles!
 [Better logs for ExpressJS using Winston and Morgan with Typescript (by
 Andrea Vassallo)](https://levelup.gitconnected.com/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-1c31c1ab9342)  
 [Nodejs에서 로깅하기 (yceffort 님)](https://yceffort.kr/2021/02/logging-in-nodejs)  
-[node.js 서버에서 로그를 남겨보자 (yurlee 님)](https://42place.innovationacademy.kr/archives/9137)
+[node.js 서버에서 로그를 남겨보자 (yurlee 님)](https://42place.innovationacademy.kr/archives/9137)  
 [5 Node.js Logging libraries compared for you to make the optimal choice](https://geshan.com.np/blog/2021/01/nodejs-logging-library/)
