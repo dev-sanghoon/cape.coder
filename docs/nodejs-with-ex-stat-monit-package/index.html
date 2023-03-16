@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>빠르게 서버를 모니터링하고 알람을 받아보자</title><!-- HEAD_svelte-1dene28_START --><meta name="description" content="express-status-monitor과 PM2의 JS API를 활용해서 심플한 모니터링 및 알람 시스템 구축하기"><link href="https://sanghoon.today/nodejs-with-ex-stat-monit-package/" rel="canonical"><!-- HEAD_svelte-1dene28_END --><link rel="stylesheet" href="/_elderjs/assets/svelte-a68a8da3.css" media="all" /><style></style></head><body class="articles"><nav class="header svelte-12qtlvf"><a class="title svelte-12qtlvf" href="/">Cape.Coder</a>
+  <div class="categories svelte-12qtlvf"><a class="category-item svelte-12qtlvf" href="/logs/">Logs</a>
+    <a class="category-item svelte-12qtlvf" href="/about/">About</a></div></nav>
+
+<div class="container"><!-- HTML_TAG_START -->
+
+<div class="title svelte-1iwhg1n"><h1 class="svelte-1iwhg1n">빠르게 서버를 모니터링하고 알람을 받아보자</h1>
+  </div>
+
+<!-- HTML_TAG_START --><h3 id="문제">문제</h3>
+<p>러닝 커브가 1순위 고려 대상이었다. 대부분의 모니터링, 알람 시스템은 APM 프로그램으로 SaaS로 제공되고 있었다. 파워풀하긴 하지만, 개인 포트폴리오에 사용하기에는 시간적으로나 비용적으로나 비효율적이었다. 또한, 만일을 대비해서 변경 가능성도 염두에 둬야 했다. 그러니 최대한 서버 어플리케이션과 decouple되는 것이 중요했다.</p>
+<h3 id="express-status-monitor">express-status-monitor</h3>
+<p><a href="https://github.com/RafalWilinski/express-status-monitor">github</a><br>
+러닝커브가 거의 없다시피 한 모니터링 npm 패키지이다. 사용법도 쉽고, 향후에 다른 모니터링 시스템으로 대체하기도 쉽다. 이름대로 express에서 쓸 수 있는데, import 해서 app.use를 활용하여 미들웨어로 쓰기만 하면 되었다. 다른 모니터링 시스템을 사용하게 될 때에도 시스템 구조에 영향 없이 간단하게 삭제가 가능했다.</p>
+<p>보여주는 데이터 또한 명료했다. express-status-monitor은 5가지 내외의 지표를 제공한다. 다른 APM 서비스를 보면, 제공해주는 데이터에 압도되는 느낌을 받았다. 무엇을 봐야할지 감이 안 잡혔기 때문이다. 그러나 5가지만 보여주니 이것들이 주요 지표구나, 하고 이해할 수 있었다.</p>
+<p>다만 실시간으로 제공되며, 어플리케이션 내부에서 작동한다는 점이 아쉽다. 서버 앱 내부에서 작동하니 서버가 멈추면 모니터링 또한 멈춘다. 그리고 지표를 기록하는 API를 제공하지는 않는다. 즉, 과거 데이터를 볼 수는 없다. 이는 즉 서버가 죽었을 때 지표의 흐름을 볼 수는 없다는 것이다. 따라서 운영 환경에서 활용하기에는 아쉬운 점이 있다. 하지만 없는 것보다 낫다는 건 분명하다.</p>
+<h3 id="알람은-어떻게-받으면-좋을까">알람은 어떻게 받으면 좋을까?</h3>
+<p>대부분의 알람 서비스는 APM 서비스와 함께 제공된다. 즉, APM 서비스를 안 쓰니 알람을 받는 방법도 애매했다. 하지만, 많은 기능이 필요하지 않았고 다만 서버가 멈추었을 때 메일로 알려주는 서비스 정도만 있기를 바랬다. 그러나 서버가 멈추었을 때 작동해야 하기 때문에 모니터링과 달리 서버 내부에서 작동해서는 안 됐다.</p>
+<p>알람 기능은 중요하다. 이전에 직접 개인 블로그 서버를 운영해보았는데, 허구한 날 서버가 터지곤 했다. 알 수 없는 이유로 말이다. 더욱 심각했던 건 서버가 터졌다는 사실도 모른다는 것이다. 이력서 포트폴리오에 블로그 링크를 걸어두고 이력서를 전송한 뒤, 서버가 터졌다는 사실을 알게 되었을 때는 정말 난감했다.</p>
+<p>뭐니뭐니해도 PM2가 알람을 보내기에 가장 적당했다. 그러나 PM2의 유료 서비스만이 알람 기능을 제공했다. 난감하던 와중 <a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&#x26;blogId=pjt3591oo&#x26;logNo=221101845714">이 글</a>을 발견하게 되었다. 이 글을 참고하여 <a href="https://github.com/dev-sanghoon/meerkat">Meerkat</a>이라는 프로그램을 만들었다. PM2 내부에 node.js 프로그램을 별도로 띄우고, PM2의 이벤트를 받아서 서버 앱이 stopped 이벤트를 발생시킬 때 nodemailer을 활용해 메일을 보내게끔 하였다.</p>
+<h3 id="알람-기능-테스트를-한-방법">알람 기능 테스트를 한 방법</h3>
+<p>PM2는 프로세스를 시작할 때 --max-memory-restart 라는 기능을 제공한다. 이를 활용하여 개발환경에서 express-status-monitor을 띄워두고, 서버 앱의 메모리 사용량이 100M를 넘게 되면 restart 되게끔 하였다. 부하 테스트로 서버의 메모리 사용량을 100M가 넘게 만든 뒤, express-status-monitor과 메일을 확인하였다. 메모리 사용량이 100Mb가 넘자, express-status-monitor에서 실시간 수치가 초기화되는 것을 확인할 수 있었고, 메일 또한 정상적으로 전송되었다.</p>
+<h3 id="참고">참고</h3>
+<p>좋은 글 감사합니다. 큰 도움이 되었습니다. Thank you for sharing great articles!<br>
+<a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&#x26;blogId=pjt3591oo&#x26;logNo=221101845714">서버 에러 발생 시 notification (멍개 님)</a></p>
+<!-- HTML_TAG_END --><!-- HTML_TAG_END --></div>
+    
+    
+    
+    
+    </body></html>
